@@ -1,27 +1,21 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero';
-
-const HEROES: Hero[] = [
-  {id: 1, name: 'Subhankar Roy'},
-  {id: 2, name: 'Durlav Banerjee'},
-  {id: 3, name: 'Abhijit Bind'},
-  {id: 4, name: 'Samrin Ahmed'},
-  {id: 5, name: 'Prodipto Dhar'},
-  {id: 6, name: 'Samim Almamun'},
-  {id: 7, name: 'Akash Pradeep Jatua'},
-  {id: 8, name: 'Malay Dhar'},
-  {id: 9, name: 'Gargi Pal'}
-];
+import {HeroService} from './services/hero.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [HeroService]
 })
-export class AppComponent {
+export class AppComponent  {
+  heroes: Hero[];
+  constructor(private heroService: HeroService) {
+    // getting heroes data asnychronusly using promise
+    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+  }
   selectedHero: Hero;
   title = 'Tour of Heroes';
-  heroes = HEROES;
 
   /**
    *
