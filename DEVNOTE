@@ -1,2 +1,6 @@
 1. v0.1 - set up project
 2. v0.2 - use of ngModel directive (https://angular.io/tutorial/toh-pt1)
+3. v0.3 - The Tour of Heroes app displays a list of selectable heroes.
+          You added the ability to select a hero and show the hero's details.
+          You learned how to use the built-in directives ngIf and ngFor in a component's template.
+
