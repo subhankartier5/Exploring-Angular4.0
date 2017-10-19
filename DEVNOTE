@@ -14,3 +14,10 @@
    You designed the service to return a Promise and the component to get the data from the Promise.
    To simulate a slow connection, import the Hero symbol and add the following getHeroesSlowly() method to the HeroService.
 
+6. v0.6 - You added the Angular router to navigate among different components.
+   You learned how to create router links to represent navigation menu items.
+   You used router link parameters to navigate to the details of the user-selected hero.
+   You shared the HeroService among multiple components.
+   You moved HTML and CSS out of the component file and into their own files.
+   You added the uppercase pipe to format data.
+

@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HeroesApp</title>
+    <title>Title</title>
 </head>
 <body>
-  <h1>{{title}}</h1>
-  <h2>My Heroes</h2>
-  <ul class="heroes">
-    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected] = "hero === selectedHero">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </li>
-  </ul>
-  <hero-detail [hero]="selectedHero"></hero-detail>
-  <hero-detail-id [hero2]="selectedHero"></hero-detail-id>
+<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+</nav>
+<router-outlet></router-outlet>
 </body>
 </html>
