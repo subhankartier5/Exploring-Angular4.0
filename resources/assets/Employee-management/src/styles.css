@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.card-container {
+  background-color: #b0c4de;
+  padding-top: 60px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 40px;
+  margin-top: 10%;
+  width: 50%;
+  border-radius: 11px;
+}
+.card-container img {
+  height: 120px;
+  padding-bottom: 15px;
+  margin: 0 auto;
+}
