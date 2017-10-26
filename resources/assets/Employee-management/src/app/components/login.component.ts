@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {User} from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent  {
   title = 'Login';
-  login(): void {
-    alert('login request');
+  user_model = new User('admin@gmail.com', '123456');
+  submitted = false;
+  onSubmit() {
+    this.submitted = true ;
+    console.log(this.user_model);
   }
+  // get diagnostic() {
+  //   return JSON.stringify(this.user_model);
+  // }
 }

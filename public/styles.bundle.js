@@ -97,7 +97,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n.card-container {\n  background-color: #b0c4de;\n  padding-top: 60px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 40px;\n  margin-top: 10%;\n  width: 50%;\n  border-radius: 11px;\n}\n.card-container img {\n  height: 120px;\n  padding-bottom: 15px;\n  margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n.card-container {\n  background-color: #b0c4de;\n  padding-top: 60px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 40px;\n  margin-top: 10%;\n  width: 35%;\n  border-radius: 11px;\n}\n.card-container img {\n  height: 120px;\n  padding-bottom: 15px;\n  margin: 0 auto;\n}\n.myTitle {\n  font-size: 22px;\n  text-align: center;\n  padding-bottom: 6px;\n  font-weight: bold;\n}\n.ng-valid[required], .ng-valid.required  {\n  border-left: 5px solid #42A948; /* green */\n}\n\n.ng-invalid:not(form)  {\n  border-left: 5px solid #a94442; /* red */\n}\n", ""]);
 
 // exports
 

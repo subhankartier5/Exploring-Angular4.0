@@ -65,6 +65,7 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__("../../../../../src/app/models/user.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -72,12 +73,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 
+
 var LoginComponent = (function () {
     function LoginComponent() {
         this.title = 'Login';
+        this.user_model = new __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* User */]('admin@gmail.com', '123456');
+        this.submitted = false;
+        // get diagnostic() {
+        //   return JSON.stringify(this.user_model);
+        // }
     }
-    LoginComponent.prototype.login = function () {
-        alert('login request');
+    LoginComponent.prototype.onSubmit = function () {
+        this.submitted = true;
+        console.log(this.user_model);
     };
     return LoginComponent;
 }());
@@ -95,7 +103,24 @@ LoginComponent = __decorate([
 /***/ "../../../../../src/app/login-form/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container card-container\">\n  <div class=\"row\">\n    <form role=\"form\">\n      <div class=\"form-group\">\n        <img src=\"https://cdn2.iconfinder.com/data/icons/user/512/user_login_man-512.png\" alt=\"login-avatar\" class=\"img-circle img-responsive\">\n        <input type=\"text\" name=\"email\" id=\"email\" placeholder=\"E-mail\" class=\"form-control\">\n      </div>\n      <div class=\"form-group\">\n        <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" class=\"form-control\">\n      </div>\n      <button type=\"button\" id=\"btn_login\" class=\"btn btn-primary btn-block\" (click)=\"login()\"><i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login</button>\n    </form>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"container card-container\">\n  <div class=\"row myTitle\">{{title}}</div>\n  <div class=\"row\">\n    <form (ngSubmit)=\"onSubmit()\" #loginForm=\"ngForm\">\n      <div class=\"form-group\">\n        <img src=\"https://cdn2.iconfinder.com/data/icons/user/512/user_login_man-512.png\" alt=\"login-avatar\" class=\"img-circle img-responsive\">\n        <input type=\"email\" name=\"email\"  id=\"email\" placeholder=\"E-mail\" class=\"form-control\" required [(ngModel)]=\"user_model.email\" #email=\"ngModel\">\n        <div [hidden]=\"email.valid || email.pristine\" class=\"alert alert-danger\"> Email is required !</div>\n      </div>\n      <div class=\"form-group\">\n        <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" class=\"form-control\" required [(ngModel)] = \"user_model.password\" #password=\"ngModel\">\n        <div [hidden]=\"password.valid || password.pristine\" class=\"alert alert-danger\"> Password is required !</div>\n      </div>\n      <button type=\"submit\" id=\"btn_login\" class=\"btn btn-primary btn-block\" [disabled] =\"!loginForm.form.valid\"><i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login</button>\n    </form>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/models/user.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return User; });
+var User = (function () {
+    function User(email, password) {
+        this.email = email;
+        this.password = password;
+    }
+    return User;
+}());
+
+//# sourceMappingURL=user.js.map
 
 /***/ }),
 
