@@ -27,15 +27,17 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_login_service__ = __webpack_require__("../../../../../src/app/services/login-service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__routes_app_routing_module__ = __webpack_require__("../../../../../src/app/routes/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__ = __webpack_require__("../../../../../src/app/layouts/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes_app_routing_module__ = __webpack_require__("../../../../../src/app/routes/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -53,17 +55,18 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__dashboard_dashboard_component__["a" /* DashboardComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__dashboard_dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* ReactiveFormsModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */],
-            __WEBPACK_IMPORTED_MODULE_6__routes_app_routing_module__["a" /* AppRoutingModule */]
+            __WEBPACK_IMPORTED_MODULE_7__routes_app_routing_module__["a" /* AppRoutingModule */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_5__services_login_service__["a" /* LoginService */]],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_8__services_authentication_service__["a" /* AuthenticationService */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -111,8 +114,8 @@ module.exports = "<h1>Dashboard</h1>\n<h2>Welcome,</h2>\n<button type=\"button\"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -126,17 +129,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var DashboardComponent = (function () {
-    function DashboardComponent(loginComponent, router) {
-        this.loginComponent = loginComponent;
+    function DashboardComponent(authenticationService, router) {
+        this.authenticationService = authenticationService;
         this.router = router;
     }
     DashboardComponent.prototype.logout = function () {
-        this.loginComponent.loggedIn = false;
-        this.loginComponent.auth_token = null;
-        localStorage.removeItem('currentUser');
-        if (!this.loginComponent.auth_token) {
-            this.router.navigate(['/']);
-        }
+        this.authenticationService.doLogOut();
+        this.router.navigate(['/login']);
     };
     return DashboardComponent;
 }());
@@ -145,7 +144,7 @@ DashboardComponent = __decorate([
         selector: 'app-dashboard',
         template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html"),
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__login_login_component__["a" /* LoginComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__login_login_component__["a" /* LoginComponent */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
 ], DashboardComponent);
 
 var _a, _b;
@@ -153,10 +152,54 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "../../../../../src/app/layouts/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<router-outlet></router-outlet>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/layouts/app.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AppComponent = (function () {
+    function AppComponent(router) {
+        this.router = router;
+    }
+    return AppComponent;
+}());
+AppComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-root',
+        template: __webpack_require__("../../../../../src/app/layouts/app.component.html")
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+], AppComponent);
+
+var _a;
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!loggedIn\">\n  <div class=\"container card-container\">\n    <div class=\"row myTitle\">{{title}}</div>\n    <div class=\"row\">\n      <div *ngIf=\"isError\" class=\"alert alert-danger alert-dismissable\">\n        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" (click)=\"closeDiv();\">&times;</a>\n        {{error}}\n      </div>\n      <form (ngSubmit)=\"onSubmit(loginForm)\" #loginForm=\"ngForm\">\n        <div class=\"form-group\">\n          <img src=\"https://cdn2.iconfinder.com/data/icons/user/512/user_login_man-512.png\" alt=\"login-avatar\" class=\"img-circle img-responsive\">\n          <input type=\"email\" name=\"email\"  id=\"email\" placeholder=\"E-mail\" class=\"form-control\" required ngModel #email=\"ngModel\">\n          <div [hidden]=\"email.valid || email.pristine\" class=\"alert alert-danger\"> Email is required !</div>\n        </div>\n        <div class=\"form-group\">\n          <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" class=\"form-control\" required ngModel #password=\"ngModel\">\n          <div [hidden]=\"password.valid || password.pristine\" class=\"alert alert-danger\"> Password is required !</div>\n        </div>\n        <button type=\"submit\" id=\"btn_login\" class=\"btn btn-primary btn-block\" [disabled] =\"!loginForm.form.valid\"><i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login</button>\n      </form>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n"
+module.exports = "<div class=\"container card-container\">\n    <div class=\"row myTitle\">{{title}}</div>\n    <div class=\"row\">\n      <div *ngIf=\"this.authenticationService.isError\" class=\"alert alert-danger alert-dismissable\">\n        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" (click)=\"closeDiv();\">&times;</a>\n        {{this.authenticationService.error}}\n      </div>\n      <form (ngSubmit)=\"onSubmit(loginForm)\" #loginForm=\"ngForm\">\n        <div class=\"form-group\">\n          <img src=\"https://cdn2.iconfinder.com/data/icons/user/512/user_login_man-512.png\" alt=\"login-avatar\" class=\"img-circle img-responsive\">\n          <input type=\"email\" name=\"email\"  id=\"email\" placeholder=\"E-mail\" class=\"form-control\" required ngModel #email=\"ngModel\">\n          <div [hidden]=\"email.valid || email.pristine\" class=\"alert alert-danger\"> Email is required !</div>\n        </div>\n        <div class=\"form-group\">\n          <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" class=\"form-control\" required ngModel #password=\"ngModel\">\n          <div [hidden]=\"password.valid || password.pristine\" class=\"alert alert-danger\"> Password is required !</div>\n        </div>\n        <button type=\"submit\" id=\"btn_login\" class=\"btn btn-primary btn-block\" [disabled] =\"!loginForm.form.valid\"><i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i> Login</button>\n      </form>\n    </div>\n  </div>\n"
 
 /***/ }),
 
@@ -166,10 +209,8 @@ module.exports = "<div *ngIf=\"!loggedIn\">\n  <div class=\"container card-conta
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_constants__ = __webpack_require__("../../../../../src/app/constants/constants.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_login_service__ = __webpack_require__("../../../../../src/app/services/login-service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,41 +223,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
 var LoginComponent = (function () {
-    function LoginComponent(http, loginService, router) {
-        this.http = http;
-        this.loginService = loginService;
+    function LoginComponent(router, authenticationService) {
         this.router = router;
+        this.authenticationService = authenticationService;
         this.title = 'Login';
         this.isError = false;
     }
     LoginComponent.prototype.onSubmit = function (loginFormData) {
-        var _this = this;
         this.email = loginFormData.value.email;
         this.password = loginFormData.value.password;
-        this.req_body = { email: this.email, password: this.password };
-        this.http.post(__WEBPACK_IMPORTED_MODULE_1__constants_constants__["a" /* Constants */].loginUrl, this.req_body)
-            .subscribe(function (data) {
-            // redirect to dahsboard from here if status true and al well put token in local storage
-            if (data.status) {
-                _this.loggedIn = true;
-                _this.auth_token = data.token;
-                _this.loginService.getUserName().then(function (username) {
-                    _this.username = username;
-                    localStorage.setItem('currentUser', JSON.stringify({ username: _this.username, token: _this.auth_token }));
-                });
-                _this.router.navigate(['/dashboard']);
-            }
-            else {
-                _this.error = 'Error! connection refused. Please try again later';
-                _this.isError = true;
-            }
-        }, function (error) {
-            _this.error = error.error.response;
-            _this.isError = true;
-        });
+        this.authenticationService.doLogin({ 'email': this.email, 'password': this.password });
+        this.router.navigate(['/dashboard']);
     };
     LoginComponent.prototype.closeDiv = function () { this.isError = false; };
     return LoginComponent;
@@ -226,10 +244,10 @@ LoginComponent = __decorate([
         selector: 'app-login',
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_login_service__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_login_service__["a" /* LoginService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _b || Object])
 ], LoginComponent);
 
-var _a, _b, _c;
+var _a, _b;
 //# sourceMappingURL=login.component.js.map
 
 /***/ }),
@@ -242,6 +260,7 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -251,8 +270,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
-    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */] }
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -270,32 +292,68 @@ AppRoutingModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/services/login-service.ts":
+/***/ "../../../../../src/app/services/authentication.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticationService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_constants__ = __webpack_require__("../../../../../src/app/constants/constants.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
-var LoginService = (function () {
-    function LoginService() {
+
+
+var AuthenticationService = (function () {
+    /* class constructor */
+    function AuthenticationService(http) {
+        this.http = http;
+        this.isError = false;
+        this.loggedIn = false;
     }
-    LoginService.prototype.getUserName = function () {
-        return Promise.resolve('Tier5');
+    /* on initialize service */
+    AuthenticationService.prototype.ngOnInit = function () {
+        this.isError = false;
     };
-    return LoginService;
+    /**
+     * log user in
+     * @param {User} userInfo
+     */
+    AuthenticationService.prototype.doLogin = function (userInfo) {
+        var _this = this;
+        this.http.post(__WEBPACK_IMPORTED_MODULE_2__constants_constants__["a" /* Constants */].loginUrl, userInfo)
+            .subscribe(function (data) {
+            _this.data_string = JSON.parse(JSON.stringify(data));
+            _this.loggedIn = true;
+            _this.auth_token = _this.data_string.token;
+            localStorage.setItem('currentUser', JSON.stringify({ username: userInfo.email, token: _this.auth_token }));
+        }, function (err) {
+            _this.isError = true;
+            _this.error = err.error.response;
+        });
+    };
+    AuthenticationService.prototype.doLogOut = function () {
+        this.loggedIn = false;
+        this.auth_token = null;
+        localStorage.removeItem('currentUser');
+    };
+    return AuthenticationService;
 }());
-LoginService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
-], LoginService);
+AuthenticationService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+], AuthenticationService);
 
-//# sourceMappingURL=login-service.js.map
+var _a;
+//# sourceMappingURL=authentication.service.js.map
 
 /***/ }),
 

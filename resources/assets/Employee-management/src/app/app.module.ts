@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from './services/login-service';
-import {AppRoutingModule} from './routes/app-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {AppComponent} from './layouts/app.component';
+import {AppRoutingModule} from './routes/app-routing.module';
+import {AuthenticationService} from './services/authentication.service';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [LoginService],
-  bootstrap: [LoginComponent]
+  providers: [AuthenticationService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

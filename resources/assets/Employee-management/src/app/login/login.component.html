@@ -1,10 +1,9 @@
-<div *ngIf="!loggedIn">
-  <div class="container card-container">
+<div class="container card-container">
     <div class="row myTitle">{{title}}</div>
     <div class="row">
-      <div *ngIf="isError" class="alert alert-danger alert-dismissable">
+      <div *ngIf="this.authenticationService.isError" class="alert alert-danger alert-dismissable">
         <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="closeDiv();">&times;</a>
-        {{error}}
+        {{this.authenticationService.error}}
       </div>
       <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
         <div class="form-group">
@@ -20,5 +19,3 @@
       </form>
     </div>
   </div>
-</div>
-<router-outlet></router-outlet>
