@@ -9,7 +9,6 @@ export class AuthenticationService implements OnInit {
   error: string;
   loggedIn = false;
   auth_token: string;
-  data_string: LoginResponse;
   /* class constructor */
   constructor(private http: HttpClient) {}
   /* on initialize service */
@@ -21,24 +20,28 @@ export class AuthenticationService implements OnInit {
    * log user in
    * @param {User} userInfo
    */
-  doLogin(userInfo: User): void {
-    this.http.post(Constants.loginUrl, userInfo)
-      .subscribe(
-        data => {
-          this.data_string = JSON.parse(JSON.stringify(data));
-          this.loggedIn = true;
-          this.auth_token = this.data_string.token;
-          localStorage.setItem('currentUser', JSON.stringify({ username: userInfo.email, token: this.auth_token }));
-        },
-        err => {
-          this.isError = true;
-          this.error = err.error.response;
-        }
-      );
+  doLogin(userInfo: User) {
+    return this.http.post(Constants.loginUrl, userInfo);
   }
+
+  /**
+   * log user out
+   */
   doLogOut(): void {
     this.loggedIn = false;
     this.auth_token = null;
     localStorage.removeItem('currentUser');
+  }
+
+  /**
+   * check if the user is logged in or not
+   * @return {boolean}
+   */
+  get userLoggedIn(): boolean {
+    if (this.loggedIn && this.auth_token.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

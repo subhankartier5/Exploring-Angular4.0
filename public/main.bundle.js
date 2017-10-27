@@ -31,12 +31,14 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__ = __webpack_require__("../../../../../src/app/layouts/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes_app_routing_module__ = __webpack_require__("../../../../../src/app/routes/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__routes_auth_guard_guard__ = __webpack_require__("../../../../../src/app/routes/auth-guard.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -65,7 +67,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */],
             __WEBPACK_IMPORTED_MODULE_7__routes_app_routing_module__["a" /* AppRoutingModule */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_8__services_authentication_service__["a" /* AuthenticationService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_8__services_authentication_service__["a" /* AuthenticationService */], __WEBPACK_IMPORTED_MODULE_9__routes_auth_guard_guard__["a" /* AuthGuardGuard */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -228,15 +230,31 @@ var LoginComponent = (function () {
         this.router = router;
         this.authenticationService = authenticationService;
         this.title = 'Login';
-        this.isError = false;
     }
     LoginComponent.prototype.onSubmit = function (loginFormData) {
+        var _this = this;
         this.email = loginFormData.value.email;
         this.password = loginFormData.value.password;
-        this.authenticationService.doLogin({ 'email': this.email, 'password': this.password });
-        this.router.navigate(['/dashboard']);
+        this.responseData = this.authenticationService.doLogin({ 'email': this.email, 'password': this.password });
+        this.responseData.subscribe(function (data) {
+            if (data.status) {
+                _this.authenticationService.loggedIn = true;
+                _this.authenticationService.auth_token = data.token;
+                localStorage.setItem('currentUser', JSON.stringify({ username: _this.email, token: _this.authenticationService.auth_token }));
+                _this.router.navigate(['/dashboard']);
+            }
+            else {
+                _this.authenticationService.isError = true;
+                _this.authenticationService.loggedIn = false;
+                _this.authenticationService.error = 'Something went wrong! can not be able to sign you in.';
+            }
+        }, function (err) {
+            _this.authenticationService.isError = true;
+            _this.authenticationService.loggedIn = false;
+            _this.authenticationService.error = err.error.response;
+        });
     };
-    LoginComponent.prototype.closeDiv = function () { this.isError = false; };
+    LoginComponent.prototype.closeDiv = function () { this.authenticationService.isError = false; };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
@@ -261,6 +279,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_guard_guard__ = __webpack_require__("../../../../../src/app/routes/auth-guard.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -271,9 +290,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */] },
+    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_4__auth_guard_guard__["a" /* AuthGuardGuard */]] },
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] }
 ];
 var AppRoutingModule = (function () {
@@ -289,6 +309,46 @@ AppRoutingModule = __decorate([
 ], AppRoutingModule);
 
 //# sourceMappingURL=app-routing.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/routes/auth-guard.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuardGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuardGuard = (function () {
+    function AuthGuardGuard(authenticationService, router) {
+        this.authenticationService = authenticationService;
+        this.router = router;
+    }
+    AuthGuardGuard.prototype.canActivate = function (next, state) {
+        return this.authenticationService.userLoggedIn;
+    };
+    return AuthGuardGuard;
+}());
+AuthGuardGuard = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object])
+], AuthGuardGuard);
+
+var _a, _b;
+//# sourceMappingURL=auth-guard.guard.js.map
 
 /***/ }),
 
@@ -328,23 +388,32 @@ var AuthenticationService = (function () {
      * @param {User} userInfo
      */
     AuthenticationService.prototype.doLogin = function (userInfo) {
-        var _this = this;
-        this.http.post(__WEBPACK_IMPORTED_MODULE_2__constants_constants__["a" /* Constants */].loginUrl, userInfo)
-            .subscribe(function (data) {
-            _this.data_string = JSON.parse(JSON.stringify(data));
-            _this.loggedIn = true;
-            _this.auth_token = _this.data_string.token;
-            localStorage.setItem('currentUser', JSON.stringify({ username: userInfo.email, token: _this.auth_token }));
-        }, function (err) {
-            _this.isError = true;
-            _this.error = err.error.response;
-        });
+        return this.http.post(__WEBPACK_IMPORTED_MODULE_2__constants_constants__["a" /* Constants */].loginUrl, userInfo);
     };
+    /**
+     * log user out
+     */
     AuthenticationService.prototype.doLogOut = function () {
         this.loggedIn = false;
         this.auth_token = null;
         localStorage.removeItem('currentUser');
     };
+    Object.defineProperty(AuthenticationService.prototype, "userLoggedIn", {
+        /**
+         * check if the user is logged in or not
+         * @return {boolean}
+         */
+        get: function () {
+            if (this.loggedIn && this.auth_token.length) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     return AuthenticationService;
 }());
 AuthenticationService = __decorate([
