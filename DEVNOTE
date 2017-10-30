@@ -4,3 +4,4 @@ v0.3 - template driven form
 v0.4 - angular login logout
 v0.5 - Login and Logout through service
 v0.6 - login logout with proper format
+v0.7 - fix router issue if not authenticated redirect back to login

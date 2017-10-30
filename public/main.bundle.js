@@ -338,7 +338,14 @@ var AuthGuardGuard = (function () {
         this.router = router;
     }
     AuthGuardGuard.prototype.canActivate = function (next, state) {
-        return this.authenticationService.userLoggedIn;
+        // return this.authenticationService.userLoggedIn;
+        // this.router.navigate(['/login']);
+        if (this.authenticationService.userLoggedIn) {
+            return this.authenticationService.userLoggedIn;
+        }
+        else {
+            this.router.navigate(['login']);
+        }
     };
     return AuthGuardGuard;
 }());
