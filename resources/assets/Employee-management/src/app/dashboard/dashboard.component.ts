@@ -7,11 +7,6 @@ import {AuthenticationService} from '../services/authentication.service';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
-  }
-
-  logout(): void {
-    this.authenticationService.doLogOut();
-    this.router.navigate(['/login']);
+  constructor(private authenticationService: AuthenticationService, private router: Router)  {
   }
 }

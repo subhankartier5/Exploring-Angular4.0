@@ -7,8 +7,6 @@ import {Constants} from '../constants/constants';
 export class AuthenticationService implements OnInit {
   isError = false;
   error: string;
-  loggedIn = false;
-  auth_token: string;
   /* class constructor */
   constructor(private http: HttpClient) {}
   /* on initialize service */
@@ -28,8 +26,6 @@ export class AuthenticationService implements OnInit {
    * log user out
    */
   doLogOut(): void {
-    this.loggedIn = false;
-    this.auth_token = null;
     localStorage.removeItem('currentUser');
   }
 
@@ -38,7 +34,7 @@ export class AuthenticationService implements OnInit {
    * @return {boolean}
    */
   get userLoggedIn(): boolean {
-    if (this.loggedIn && this.auth_token.length) {
+    if (localStorage.getItem('currentUser')) {
       return true;
     } else {
       return false;

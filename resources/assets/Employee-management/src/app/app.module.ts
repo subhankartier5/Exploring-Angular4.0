@@ -8,12 +8,14 @@ import {AppComponent} from './layouts/app.component';
 import {AppRoutingModule} from './routes/app-routing.module';
 import {AuthenticationService} from './services/authentication.service';
 import {AuthGuardGuard} from './routes/auth-guard.guard';
+import {MasterDashboardComponent} from './layouts/master-dashboard.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     DashboardComponent,
-    AppComponent
+    AppComponent,
+    MasterDashboardComponent
   ],
   imports: [
     BrowserModule,

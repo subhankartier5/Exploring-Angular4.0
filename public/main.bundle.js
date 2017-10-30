@@ -32,12 +32,14 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes_app_routing_module__ = __webpack_require__("../../../../../src/app/routes/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__routes_auth_guard_guard__ = __webpack_require__("../../../../../src/app/routes/auth-guard.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__layouts_master_dashboard_component__ = __webpack_require__("../../../../../src/app/layouts/master-dashboard.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -58,7 +60,8 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_5__dashboard_dashboard_component__["a" /* DashboardComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__layouts_master_dashboard_component__["a" /* MasterDashboardComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -106,7 +109,7 @@ Constants.api_endpoint = 'http://127.0.0.1:8000/api/v1';
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Dashboard</h1>\n<h2>Welcome,</h2>\n<button type=\"button\" (click)=\"logout()\">logout</button>\n"
+module.exports = "<app-master-dashboard></app-master-dashboard>\n"
 
 /***/ }),
 
@@ -135,10 +138,6 @@ var DashboardComponent = (function () {
         this.authenticationService = authenticationService;
         this.router = router;
     }
-    DashboardComponent.prototype.logout = function () {
-        this.authenticationService.doLogOut();
-        this.router.navigate(['/login']);
-    };
     return DashboardComponent;
 }());
 DashboardComponent = __decorate([
@@ -198,6 +197,76 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/layouts/master-dashboard.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/layouts/master-dashboard.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Employee Management</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"#\">Link</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\" (click)=\"logout()\">Logout</a></li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/layouts/master-dashboard.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MasterDashboardComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MasterDashboardComponent = (function () {
+    function MasterDashboardComponent(authenticationService, router) {
+        this.authenticationService = authenticationService;
+        this.router = router;
+    }
+    MasterDashboardComponent.prototype.logout = function () {
+        this.authenticationService.doLogOut();
+        this.router.navigate(['/login']);
+    };
+    return MasterDashboardComponent;
+}());
+MasterDashboardComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-master-dashboard',
+        template: __webpack_require__("../../../../../src/app/layouts/master-dashboard.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/layouts/master-dashboard.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__["a" /* AuthenticationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _b || Object])
+], MasterDashboardComponent);
+
+var _a, _b;
+//# sourceMappingURL=master-dashboard.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
@@ -238,19 +307,15 @@ var LoginComponent = (function () {
         this.responseData = this.authenticationService.doLogin({ 'email': this.email, 'password': this.password });
         this.responseData.subscribe(function (data) {
             if (data.status) {
-                _this.authenticationService.loggedIn = true;
-                _this.authenticationService.auth_token = data.token;
-                localStorage.setItem('currentUser', JSON.stringify({ username: _this.email, token: _this.authenticationService.auth_token }));
+                localStorage.setItem('currentUser', JSON.stringify({ username: _this.email, token: data.token }));
                 _this.router.navigate(['/dashboard']);
             }
             else {
                 _this.authenticationService.isError = true;
-                _this.authenticationService.loggedIn = false;
                 _this.authenticationService.error = 'Something went wrong! can not be able to sign you in.';
             }
         }, function (err) {
             _this.authenticationService.isError = true;
-            _this.authenticationService.loggedIn = false;
             _this.authenticationService.error = err.error.response;
         });
     };
@@ -384,7 +449,6 @@ var AuthenticationService = (function () {
     function AuthenticationService(http) {
         this.http = http;
         this.isError = false;
-        this.loggedIn = false;
     }
     /* on initialize service */
     AuthenticationService.prototype.ngOnInit = function () {
@@ -401,8 +465,6 @@ var AuthenticationService = (function () {
      * log user out
      */
     AuthenticationService.prototype.doLogOut = function () {
-        this.loggedIn = false;
-        this.auth_token = null;
         localStorage.removeItem('currentUser');
     };
     Object.defineProperty(AuthenticationService.prototype, "userLoggedIn", {
@@ -411,7 +473,7 @@ var AuthenticationService = (function () {
          * @return {boolean}
          */
         get: function () {
-            if (this.loggedIn && this.auth_token.length) {
+            if (localStorage.getItem('currentUser')) {
                 return true;
             }
             else {

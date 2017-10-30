@@ -20,19 +20,15 @@ export class LoginComponent  {
     this.responseData.subscribe(
       data => {
         if (data.status) {
-          this.authenticationService.loggedIn   = true;
-          this.authenticationService.auth_token = data.token;
-          localStorage.setItem('currentUser', JSON.stringify({ username: this.email, token: this.authenticationService.auth_token }));
+          localStorage.setItem('currentUser', JSON.stringify({ username: this.email, token: data.token }));
           this.router.navigate(['/dashboard']);
         } else {
           this.authenticationService.isError = true;
-          this.authenticationService.loggedIn   = false;
           this.authenticationService.error = 'Something went wrong! can not be able to sign you in.';
         }
       },
       err => {
         this.authenticationService.isError = true;
-        this.authenticationService.loggedIn   = false;
         this.authenticationService.error = err.error.response;
       }
     );
