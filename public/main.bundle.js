@@ -17,6 +17,83 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 
 /***/ }),
 
+/***/ "../../../../../src/app/add-employee/add-employee.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".container {\n  border: 1px solid #DCDCDC;\n  padding-top: 50px;\n  padding-bottom: 20px;\n  width: 50%;\n  border-radius: 5px;\n  border-top: 50px solid #C0C0C0;\n}\n.btn {\n  float: right;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/add-employee/add-employee.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<app-master-dashboard></app-master-dashboard>\n<div class=\"container\">\n  <form #addEmployeeForm=\"ngForm\" (ngSubmit)=\"addEmployee(addEmployeeForm)\">\n    <div class=\"form-group\">\n      <input type=\"email\" name=\"add_user_email\" id=\"add_user_email\" class=\"form-control\" placeholder=\"Email\" required ngModel #add_user_email=\"ngModel\">\n      <div [hidden]=\"add_user_email.valid || add_user_email.pristine\" class=\"alert alert-danger\"> Email is required !</div>\n    </div>\n    <div class=\"form-group\">\n      <input type=\"password\" name=\"add_user_pwd\" id=\"add_user_pwd\" class=\"form-control\" placeholder=\"Password\" required ngModel #add_user_pwd=\"ngModel\">\n      <div [hidden]=\"add_user_pwd.valid || add_user_pwd.pristine\" class=\"alert alert-danger\"> Password is required !</div>\n    </div>\n    <div class=\"form-group\">\n      <input type=\"password\" name=\"add_user_c_pwd\" id=\"add_user_c_pwd\" class=\"form-control\" placeholder=\"Confirm Password\" required ngModel #add_user_c_pwd=\"ngModel\" (keyup)=\"checkPassConfPass($event, add_user_pwd)\">\n      <div [hidden]=\"add_user_c_pwd.valid || add_user_c_pwd.pristine\" class=\"alert alert-danger\"> Confirm Password is required !</div>\n      <div *ngIf=\"!passwordMatch\" class=\"alert alert-danger\">Password and confirm password doesn't match!</div>\n    </div>\n    <button class=\"btn btn-primary btn-block\" type=\"submit\" [disabled]=\"!addEmployeeForm.form.valid || !passwordMatch\">Add</button>\n  </form>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/add-employee/add-employee.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddEmployeeComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var AddEmployeeComponent = (function () {
+    function AddEmployeeComponent() {
+        this.passwordMatch = false;
+    }
+    /**
+     * adding employee to the database
+     * @param {NgForm} employeeFormData
+     */
+    AddEmployeeComponent.prototype.addEmployee = function (employeeFormData) {
+        console.log(employeeFormData.value);
+    };
+    /**
+     * check passowrd and confirm passowrd is matched or not
+     * @param $event_data
+     * @param {NgForm} $password
+     */
+    AddEmployeeComponent.prototype.checkPassConfPass = function ($event_data, $password) {
+        if ($event_data.target.value === $password.value) {
+            this.passwordMatch = true;
+            console.log('password and confirm passowrd matched!');
+        }
+        else {
+            this.passwordMatch = false;
+        }
+    };
+    return AddEmployeeComponent;
+}());
+AddEmployeeComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-add-employee',
+        template: __webpack_require__("../../../../../src/app/add-employee/add-employee.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/add-employee/add-employee.component.css")]
+    })
+], AddEmployeeComponent);
+
+//# sourceMappingURL=add-employee.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/app.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -33,12 +110,14 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__routes_auth_guard_guard__ = __webpack_require__("../../../../../src/app/routes/auth-guard.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__layouts_master_dashboard_component__ = __webpack_require__("../../../../../src/app/layouts/master-dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__add_employee_add_employee_component__ = __webpack_require__("../../../../../src/app/add-employee/add-employee.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -61,7 +140,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_5__dashboard_dashboard_component__["a" /* DashboardComponent */],
             __WEBPACK_IMPORTED_MODULE_6__layouts_app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__layouts_master_dashboard_component__["a" /* MasterDashboardComponent */]
+            __WEBPACK_IMPORTED_MODULE_10__layouts_master_dashboard_component__["a" /* MasterDashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__add_employee_add_employee_component__["a" /* AddEmployeeComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -218,7 +298,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/layouts/master-dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Employee Management</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\"><a href=\"#\">Link <span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"#\">Link</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\" (click)=\"logout()\">Logout</a></li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" routerLink=\"/dashboard\">Employee Management</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li><a routerLink=\"/add-employee\">Add Employee <span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"#\">Employee Lists</a></li>\n        <li><a href=\"#\">Employee Interview Schedules</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\" (click)=\"logout()\">Logout</a></li>\n      </ul>\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n"
 
 /***/ }),
 
@@ -345,6 +425,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_guard_guard__ = __webpack_require__("../../../../../src/app/routes/auth-guard.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__add_employee_add_employee_component__ = __webpack_require__("../../../../../src/app/add-employee/add-employee.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -356,10 +437,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
     { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_4__auth_guard_guard__["a" /* AuthGuardGuard */]] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] }
+    { path: 'add-employee', component: __WEBPACK_IMPORTED_MODULE_5__add_employee_add_employee_component__["a" /* AddEmployeeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_4__auth_guard_guard__["a" /* AuthGuardGuard */]] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

@@ -6,3 +6,4 @@ v0.5 - Login and Logout through service
 v0.6 - login logout with proper format
 v0.7 - fix router issue if not authenticated redirect back to login
 v0.8 - fix on refresh getting logged out
+v0.9 - create add employee frontend

@@ -1,0 +1,11 @@
+.container {
+  border: 1px solid #DCDCDC;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  width: 50%;
+  border-radius: 5px;
+  border-top: 50px solid #C0C0C0;
+}
+.btn {
+  float: right;
+}

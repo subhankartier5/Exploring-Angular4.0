@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::prefix('v1')->group(function (){
     Route::post('authenticate-user', 'Apiv1Controller@authenticate')->name('postAuthenticateUser');
+    Route::get('technologies', 'Apiv1Controller@getTechnologies')->name('getTechnologies');
 });

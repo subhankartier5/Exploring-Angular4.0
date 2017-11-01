@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\SkillSets;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use JWTAuth;
+use Mockery\Exception;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class Apiv1Controller extends Controller
@@ -12,6 +15,7 @@ class Apiv1Controller extends Controller
     /**
      * authenticate the user
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function authenticate(Request $request) {
         if ($request->has('email') && $request->has('password')) {
@@ -45,6 +49,30 @@ class Apiv1Controller extends Controller
                'status' => false,
                'response' => 'Please provide required credentials!'
             ], 500);
+        }
+    }
+
+    /**
+     * get Technologies list
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTechnologies() {
+        try {
+
+            $technologies = SkillSets::all();
+
+            return response()->json([
+                'status' => true,
+                'response' => $technologies
+            ],200);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                'status' => false,
+                'response' => $e->getMessage()
+            ],$e->getCode());
+
         }
     }
 }
